@@ -44,8 +44,8 @@ class HistoryAdapter(private val items: List<HistoryAppointment>) :
     )
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.serviceNameText.text = items[position].serviceName
-        holder.binding.appointmentDateText.text = "Completed: ${items[position].date}"
-        holder.binding.priceText.text = "Price: ${items[position].price}"
+        "Completed: ${items[position].date}".also { holder.binding.appointmentDateText.text = it }
+        "Price: ${items[position].price}".also { holder.binding.priceText.text = it }
     }
     override fun getItemCount() = items.size
 }

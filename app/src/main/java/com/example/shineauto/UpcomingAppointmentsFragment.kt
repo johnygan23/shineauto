@@ -70,9 +70,9 @@ class AppointmentAdapter(private var appointments: MutableList<Appointment>) :
 
         fun bind(appointment: Appointment) {
             binding.serviceNameText.text = appointment.service.title
-            binding.appointmentAddressText.text = "Address: ${appointment.address}"
-            binding.appointmentDateText.text = "Date: ${appointment.date}"
-            binding.appointmentTimeText.text = "Time: ${appointment.time}"
+            "Address: ${appointment.address}".also { binding.appointmentAddressText.text = it }
+            "Date: ${appointment.date}".also { binding.appointmentDateText.text = it }
+            "Time: ${appointment.time}".also { binding.appointmentTimeText.text = it }
         }
     }
 }

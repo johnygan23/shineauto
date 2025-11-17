@@ -38,15 +38,12 @@ class Fragment4 : Fragment() {
         // 3. Create the list of profile options
         val options = listOf(
             ProfileOption("Manage My Cars", R.drawable.manage_cars) {
-                // TODO: Start ManageMyCarsActivity
                 Toast.makeText(context, "Navigating to My Cars...", Toast.LENGTH_SHORT).show()
             },
             ProfileOption("Manage Profile", R.drawable.manage_profile) {
-                // TODO: Start SettingsActivity
                 Toast.makeText(context, "Navigating to Settings...", Toast.LENGTH_SHORT).show()
             },
             ProfileOption("Log Out", R.drawable.logout) {
-                // TODO: Handle user logout logic
                 Toast.makeText(context, "Logging out...", Toast.LENGTH_SHORT).show()
             }
         )

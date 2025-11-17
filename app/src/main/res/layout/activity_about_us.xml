@@ -26,7 +26,7 @@
         android:id="@+id/about_us_background"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:contentDescription="Interior of a modern car wash"
+        android:contentDescription="@string/about_us_bg"
         android:scaleType="centerCrop"
         android:src="@drawable/polish"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="About ShineAuto"
+                android:text="@string/about"
                 android:textAppearance="?attr/textAppearanceHeadline4"
                 android:textColor="?attr/colorPrimary" />
 
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:gravity="center"
-                android:text="Our Mission: To provide every vehicle with a brilliant, lasting shine to your doorstep."
+                android:text="@string/mission"
                 android:textAppearance="?attr/textAppearanceTitleMedium"
                 android:textStyle="italic" />
 
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Founded in 2024, ShineAuto have been serving car owners in Klang Valley with passion. Our team of trained professionals uses state-of-the-art equipment and the highest quality, pH-balanced products to protect your vehicle's finish while delivering a stunning clean, every time."
+                android:text="@string/about_description"
                 android:textAlignment="center"
                 android:textAppearance="?attr/textAppearanceBody1"
                 android:lineSpacingExtra="4dp"/>

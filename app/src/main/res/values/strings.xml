@@ -7,4 +7,16 @@
     <string name="service_image_description">services image</string>
     <string name="profile">Profile</string>
     <string name="user_profile">User Profile</string>
+    <string name="about_us_bg">Interior of a modern car wash</string>
+    <string name="about">About ShineAuto</string>
+    <string name="mission">Our Mission: To provide every vehicle with a brilliant, lasting shine to your doorstep.</string>
+    <string name="about_description">Founded in 2024, ShineAuto have been serving car owners in Klang Valley with passion. Our team of trained professionals uses state-of-the-art equipment and the highest quality, pH-balanced products to protect your vehicle\'s finish while delivering a stunning clean, every time.</string>
+    <string name="contact_us_bg">A clean car interior</string>
+    <string name="get_in_touch">Get In Touch</string>
+    <string name="contact_us_description">We\'re here to help! Reach out to us with any questions or to schedule a special service.</string>
+    <string name="phone_number">012-3338888</string>
+    <string name="faq">Frequently Asked Questions</string>
+    <string name="services">Services</string>
+    <string name="appointment">Appointment</string>
+    <string name="about_us">About Us</string>
 </resources>

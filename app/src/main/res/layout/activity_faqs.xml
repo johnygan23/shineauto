@@ -27,8 +27,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:padding="16dp"
-        android:textSize="30dp"
-        android:text="Frequently Asked Questions"
+        android:textSize="30sp"
+        android:text="@string/faq"
         android:textAppearance="?attr/textAppearanceHeadline5"
         android:textColor="?attr/colorPrimary" />
 

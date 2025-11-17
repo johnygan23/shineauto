@@ -82,7 +82,7 @@ class Fragment1 : Fragment() {
 
         dialogBinding.dialogServiceTitle.text = service.title
         dialogBinding.dialogServiceDescription.text = service.description
-        dialogBinding.amountText.text = "Amount: $${formattedString}"
+        "Amount: $${formattedString}".also { dialogBinding.amountText.text = it }
 
         dialogBinding.dateInput.setOnClickListener {
             val calendar = Calendar.getInstance()

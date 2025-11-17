@@ -38,6 +38,7 @@
         android:id="@+id/bottom_nav_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:gravity="center"
         android:background="@color/light_blue"
@@ -63,7 +64,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Services"/>
+                android:text="@string/services"/>
         </LinearLayout>
 
         <!-- Appointments -->
@@ -83,7 +84,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Appointment"/>
+                android:text="@string/appointment"/>
         </LinearLayout>
 
         <!-- About Us -->
@@ -103,7 +104,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="About Us"/>
+                android:text="@string/about_us"/>
         </LinearLayout>
 
     </LinearLayout>
