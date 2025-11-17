@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding.materialToolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.profile -> {
-                    Toast.makeText(this, "Profile clicked", Toast.LENGTH_SHORT).show()
+                    goToFragment(Fragment4())
                     true
                 }
                 else -> false
