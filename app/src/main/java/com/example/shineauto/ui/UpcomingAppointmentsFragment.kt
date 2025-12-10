@@ -1,4 +1,4 @@
-package com.example.shineauto
+package com.example.shineauto.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater

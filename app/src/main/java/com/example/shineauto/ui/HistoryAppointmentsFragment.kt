@@ -1,11 +1,13 @@
-package com.example.shineauto
+package com.example.shineauto.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.example.shineauto.databinding.FragmentHistoryAppointmentsBinding
+import com.example.shineauto.databinding.ItemAppointmentHistoryBinding
 
 // Placeholder data class
 data class HistoryAppointment(val serviceName: String, val date: String, val price: String)
@@ -36,11 +38,11 @@ class HistoryAppointmentsFragment : Fragment() {
 
 // Simplified Adapter
 class HistoryAdapter(private val items: List<HistoryAppointment>) :
-    androidx.recyclerview.widget.RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
-    class ViewHolder(val binding: com.example.shineauto.databinding.ItemAppointmentHistoryBinding) :
-        androidx.recyclerview.widget.RecyclerView.ViewHolder(binding.root)
+    RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+    class ViewHolder(val binding: ItemAppointmentHistoryBinding) :
+        RecyclerView.ViewHolder(binding.root)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        com.example.shineauto.databinding.ItemAppointmentHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        ItemAppointmentHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
     )
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.serviceNameText.text = items[position].serviceName

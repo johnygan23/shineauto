@@ -1,23 +1,23 @@
-package com.example.shineauto
+package com.example.shineauto.ui
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.shineauto.databinding.Fragment3Binding
+import androidx.fragment.app.Fragment
+import com.example.shineauto.databinding.FragmentInformationBinding
 
-class Fragment3 : Fragment() {
+class InformationFragment : Fragment() {
 
-    private var _binding: Fragment3Binding? = null
+    private var _binding: FragmentInformationBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = Fragment3Binding.inflate(inflater, container, false)
+        _binding = FragmentInformationBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -25,20 +25,17 @@ class Fragment3 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonAboutUs.setOnClickListener {
-            // Create an Intent to start AboutUsActivity
-            val intent = Intent(activity, AboutUsActivity::class.java)
+            val intent = Intent(requireActivity(), AboutUsActivity::class.java)
             startActivity(intent)
         }
 
         binding.buttonFaqs.setOnClickListener {
-            // Create an Intent to start FaqsActivity
-            val intent = Intent(activity, FaqsActivity::class.java)
+            val intent = Intent(requireActivity(), FaqsActivity::class.java)
             startActivity(intent)
         }
 
         binding.buttonContactUs.setOnClickListener {
-            // Create an Intent to start ContactUsActivity
-            val intent = Intent(activity, ContactUsActivity::class.java)
+            val intent = Intent(requireActivity(), ContactUsActivity::class.java)
             startActivity(intent)
         }
     }

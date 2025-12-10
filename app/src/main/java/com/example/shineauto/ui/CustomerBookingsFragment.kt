@@ -1,23 +1,24 @@
-package com.example.shineauto
+package com.example.shineauto.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.shineauto.databinding.Fragment2Binding
+import com.example.shineauto.AppointmentsPagerAdapter
+import com.example.shineauto.databinding.FragmentCustomerBookingsBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-class Fragment2 : Fragment() {
+class CustomerBookingsFragment : Fragment() {
 
-    private var _binding: Fragment2Binding? = null
+    private var _binding: FragmentCustomerBookingsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = Fragment2Binding.inflate(inflater, container, false)
+        _binding = FragmentCustomerBookingsBinding.inflate(inflater, container, false)
         return binding.root
     }
 

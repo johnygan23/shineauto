@@ -1,4 +1,4 @@
-package com.example.shineauto
+package com.example.shineauto.ui
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -11,7 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shineauto.R
 import com.example.shineauto.databinding.DialogBookServiceBinding
+import com.example.shineauto.databinding.FragmentCustomerServiceListBinding
+import com.example.shineauto.databinding.ItemCarWashServiceBinding
+import com.example.shineauto.ui.CustomerBookingsFragment
 import java.util.Calendar
 import java.util.Locale
 
@@ -36,10 +40,9 @@ object AppointmentRepository {
     val appointments = mutableListOf<Appointment>()
 }
 
-
 // 2. The Fragment
-class Fragment1 : Fragment() {
-    private var _binding: com.example.shineauto.databinding.Fragment1Binding? = null
+class CustomerServiceListFragment : Fragment() {
+    private var _binding: FragmentCustomerServiceListBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -47,7 +50,7 @@ class Fragment1 : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout using the binding class'''s fully qualified name
-        _binding = com.example.shineauto.databinding.Fragment1Binding.inflate(inflater, container, false)
+        _binding = FragmentCustomerServiceListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -118,7 +121,7 @@ class Fragment1 : Fragment() {
                 Toast.makeText(requireContext(), "Booking successful!", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
 
-                (activity as? MainActivity)?.navigateToFragment(Fragment2())
+                (activity as? MainActivity)?.navigateToFragment(CustomerBookingsFragment())
             }
         }
         (dialogBinding.root as ViewGroup).addView(bookButton)
@@ -141,7 +144,7 @@ class CarWashServiceAdapter(
 
     // Describes an item view and its metadata
     // Use the fully qualified name for the item binding class here as well
-    class ServiceViewHolder(private val binding: com.example.shineauto.databinding.ItemCarWashServiceBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ServiceViewHolder(private val binding: ItemCarWashServiceBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(service: CarWashService, onServiceSelected: (CarWashService) -> Unit) {
             binding.serviceTitle.text = service.title
             binding.serviceImage.setImageResource(service.imageResId)
@@ -153,7 +156,7 @@ class CarWashServiceAdapter(
 
     // Creates new views (invoked by the layout manager)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ServiceViewHolder {
-        val binding = com.example.shineauto.databinding.ItemCarWashServiceBinding.inflate(
+        val binding = ItemCarWashServiceBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

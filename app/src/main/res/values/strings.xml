@@ -14,9 +14,11 @@
     <string name="contact_us_bg">A clean car interior</string>
     <string name="get_in_touch">Get In Touch</string>
     <string name="contact_us_description">We\'re here to help! Reach out to us with any questions or to schedule a special service.</string>
-    <string name="phone_number">012-3338888</string>
+    <string name="phone_number">012–3338888</string>
     <string name="faq">Frequently Asked Questions</string>
     <string name="services">Services</string>
     <string name="appointment">Appointment</string>
     <string name="about_us">About Us</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>

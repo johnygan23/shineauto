@@ -1,16 +1,16 @@
-package com.example.shineauto
+package com.example.shineauto.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.shineauto.databinding.ActivityAboutUsBinding
+import com.example.shineauto.databinding.ActivityFaqsBinding
 
-class AboutUsActivity : AppCompatActivity() {
+class FaqsActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAboutUsBinding
+    private lateinit var binding: ActivityFaqsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAboutUsBinding.inflate(layoutInflater)
+        binding = ActivityFaqsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.toolbar.setNavigationOnClickListener {

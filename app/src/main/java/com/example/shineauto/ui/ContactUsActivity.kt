@@ -1,4 +1,4 @@
-package com.example.shineauto
+package com.example.shineauto.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -28,7 +28,7 @@ class ContactUsActivity : AppCompatActivity() {
         binding.buttonCall.setOnClickListener {
             // Create an intent to dial the number
             val callIntent = Intent(Intent.ACTION_DIAL).apply {
-                data = "tel:$phoneNumber".toUri()
+                data =  "tel:$phoneNumber".toUri()
             }
             // Start the activity, which will open the user's phone dialer
             startActivity(callIntent)
