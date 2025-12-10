@@ -39,8 +39,6 @@ object AppointmentRepository {
 
 // 2. The Fragment
 class Fragment1 : Fragment() {
-
-    // Using the fully qualified name for the binding class
     private var _binding: com.example.shineauto.databinding.Fragment1Binding? = null
     private val binding get() = _binding!!
 
@@ -119,14 +117,11 @@ class Fragment1 : Fragment() {
                 AppointmentRepository.appointments.add(newAppointment)
                 Toast.makeText(requireContext(), "Booking successful!", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
-                
+
                 (activity as? MainActivity)?.navigateToFragment(Fragment2())
-                (activity as? MainActivity)?.binding?.buttonFragment2?.performClick()
             }
         }
-        // This is a bit of a hack, it would be better to add the button to the dialog layout
         (dialogBinding.root as ViewGroup).addView(bookButton)
-
         dialog.show()
     }
 

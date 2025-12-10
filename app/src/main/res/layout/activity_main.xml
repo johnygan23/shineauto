@@ -1,112 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/material_toolbar"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="ShineAuto"
-            app:menu="@menu/top_nav_menu" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/material_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:title="ShineAuto"
+                app:navigationIcon="@drawable/car_wash_logo0" />
 
-    <!-- Fragment container is now constrained to the bottom bar -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        android:backgroundTint="@color/grey"/>
+        </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- 1. Horizontal LinearLayout to act as a bottom navigation bar -->
-    <LinearLayout
-        android:id="@+id/bottom_nav_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:baselineAligned="false"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="@color/light_blue"
-        android:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <!-- Services -->
-        <LinearLayout
-            android:id="@+id/buttonFragment1"
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragmentContainer"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="4dp"
-            android:background="?attr/selectableItemBackgroundBorderless">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@mipmap/service"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/services"/>
-        </LinearLayout>
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
 
-        <!-- Appointments -->
-        <LinearLayout
-            android:id="@+id/buttonFragment2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="4dp"
-            android:background="?attr/selectableItemBackgroundBorderless">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@mipmap/appointment"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/appointment"/>
-        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- About Us -->
-        <LinearLayout
-            android:id="@+id/buttonFragment3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="4dp"
-            android:background="?attr/selectableItemBackgroundBorderless">
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@mipmap/information"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/about_us"/>
-        </LinearLayout>
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_drawer_menu" />
 
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

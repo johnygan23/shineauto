@@ -1,66 +1,73 @@
 package com.example.shineauto
 
 import android.os.Bundle
-import android.widget.Toast
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.example.shineauto.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen() // Simplified splash screen installation
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.materialToolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.profile -> {
-                    goToFragment(Fragment4())
-                    true
-                }
-                else -> false
-            }
-        }
+        setSupportActionBar(binding.materialToolbar)
 
-        ViewCompat.setOnApplyWindowInsetsListener(binding.main) { v, insets -> // Use binding.main directly
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+        binding.navView.setNavigationItemSelectedListener(this)
 
-        binding.buttonFragment1.setOnClickListener {
-            goToFragment(Fragment1())
-        }
-        binding.buttonFragment2.setOnClickListener {
-            goToFragment(Fragment2())
-        }
-        binding.buttonFragment3.setOnClickListener {
-            goToFragment(Fragment3())
-        }
-        // Set an initial fragment to avoid an empty container on startup
+        val toggle = ActionBarDrawerToggle(
+            this, binding.drawerLayout, binding.materialToolbar, 0, 0
+        )
+        binding.drawerLayout.addDrawerListener(toggle)
+        toggle.syncState()
+
         if (savedInstanceState == null) {
-            goToFragment(Fragment1())
+            navigateToFragment(Fragment1())
+            binding.navView.setCheckedItem(R.id.nav_services)
         }
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_services -> navigateToFragment(Fragment1())
+            R.id.nav_appointments -> navigateToFragment(Fragment2())
+            R.id.nav_about_us -> navigateToFragment(Fragment3())
+            R.id.nav_profile -> navigateToFragment(Fragment4())
+        }
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+        return true
     }
 
     fun navigateToFragment(fragment: Fragment) {
-        goToFragment(fragment)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, fragment)
+            .commit()
+
+        // Update the checked item in the navigation drawer
+        when (fragment) {
+            is Fragment1 -> binding.navView.setCheckedItem(R.id.nav_services)
+            is Fragment2 -> binding.navView.setCheckedItem(R.id.nav_appointments)
+            is Fragment3 -> binding.navView.setCheckedItem(R.id.nav_about_us)
+            is Fragment4 -> binding.navView.setCheckedItem(R.id.nav_profile)
+        }
     }
 
-    private fun goToFragment(fragment: Fragment) {
-        // Use supportFragmentManager directly
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
-        fragmentTransaction.commit()
+    override fun onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
     }
 }

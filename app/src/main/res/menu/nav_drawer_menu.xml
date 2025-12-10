@@ -9,12 +9,16 @@
             android:icon="@drawable/service"
             android:title="Services" />
         <item
-            android:id="@+id/nav_appointment"
+            android:id="@+id/nav_appointments"
             android:icon="@drawable/appointment"
-            android:title="Appointment" />
+            android:title="Appointments" />
         <item
             android:id="@+id/nav_about_us"
             android:icon="@drawable/information"
-            android:title="Information" />
+            android:title="About Us" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/profile"
+            android:title="Profile" />
     </group>
 </menu>

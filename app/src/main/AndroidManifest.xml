@@ -29,7 +29,6 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".ContactUsActivity"
-            android:parentActivityName=".MainActivity" />
-    </application>
+            android:parentActivityName=".MainActivity" />    </application>
 
 </manifest>

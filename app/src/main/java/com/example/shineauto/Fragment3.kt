@@ -11,7 +11,6 @@ import com.example.shineauto.databinding.Fragment3Binding
 class Fragment3 : Fragment() {
 
     private var _binding: Fragment3Binding? = null
-    // This property is only valid between onCreateView and onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
