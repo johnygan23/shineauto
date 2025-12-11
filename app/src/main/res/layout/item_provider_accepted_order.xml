@@ -36,6 +36,16 @@
             app:layout_constraintTop_toBottomOf="@id/textServiceName" />
 
         <TextView
+            android:id="@+id/textAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123 Main St"
+            android:textSize="14sp"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textCustomerInfo" />
+
+        <TextView
             android:id="@+id/textDateTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +54,8 @@
             android:text="Scheduled: 12/12/2025 at 10:00 AM"
             app:drawableStartCompat="@android:drawable/ic_menu_my_calendar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textCustomerInfo" />
+            app:layout_constraintTop_toBottomOf="@id/textAddress" />
+
 
         <Button
             android:id="@+id/btnMarkCompleted"

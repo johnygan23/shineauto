@@ -7,15 +7,15 @@
             android:title="Pending Orders" />
         <item
             android:id="@+id/nav_provider_accepted_orders"
-            android:icon="@android:drawable/ic_menu_view"
+            android:icon="@drawable/appointment"
             android:title="Accepted Orders" />
         <item
             android:id="@+id/nav_provider_services"
-            android:icon="@android:drawable/ic_menu_edit"
+            android:icon="@drawable/service"
             android:title="My Services" />
         <item
             android:id="@+id/nav_provider_profile"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/profile"
             android:title="Profile" />
     </group>
 </menu>

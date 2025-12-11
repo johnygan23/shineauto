@@ -46,18 +46,14 @@ class CustomerHistoryBookingsFragment : Fragment() {
                 .bookingDao()
                 .getHistoryBookings(currentCustomerId) // Fetches COMPLETED or CANCELLED
                 .collect { bookings ->
-                    // Requirement 6: Filter to show only bookings where the date is in the past
-                    val pastBookings = bookings.filter { booking ->
-                        AppUtils.isDateInPast(booking.date)
-                    }
 
-                    if (pastBookings.isEmpty()) {
+                    if (bookings.isEmpty()) {
                         binding.emptyStateText.visibility = View.VISIBLE
                         binding.historyRecyclerView.visibility = View.GONE
                     } else {
                         binding.emptyStateText.visibility = View.GONE
                         binding.historyRecyclerView.visibility = View.VISIBLE
-                        adapter.submitList(pastBookings)
+                        adapter.submitList(bookings)
                     }
                 }
         }

@@ -12,5 +12,6 @@ data class Booking(
     val serviceName: String,
     val date: String,
     val time: String,
+    val address: String,
     val status: String
 )

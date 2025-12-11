@@ -106,7 +106,10 @@ class ProviderOrderAdapter(
     inner class ViewHolder(private val binding: ItemProviderOrderRequestBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(booking: Booking) {
             binding.textServiceName.text = booking.serviceName
-            binding.textCustomerInfo.text = "Customer ID: #${booking.customerId}"
+
+            binding.textCustomerInfo.text = "Customer: ${booking.customerName}"
+            binding.textAddress.text = "Address: ${booking.address}"
+
             binding.textDate.text = booking.date
             binding.textTime.text = booking.time
 

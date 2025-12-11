@@ -2,6 +2,7 @@ package com.example.shineauto.ui
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shineauto.R
 import com.example.shineauto.data.ShineAutoDatabase
 import com.example.shineauto.databinding.DialogBookServiceBinding
 import com.example.shineauto.databinding.FragmentCustomerServiceListBinding
@@ -124,20 +126,20 @@ class CustomerServiceListFragment : Fragment() {
         bookButton.setOnClickListener {
             val date = dialogBinding.dateInput.text.toString()
             val time = dialogBinding.timeInput.text.toString()
+            val address = dialogBinding.addressInput.text.toString()
 
-            if (date.isNotEmpty() && time.isNotEmpty()) {
-                saveBookingToDatabase(service, date, time)
+            if (date.isNotEmpty() && time.isNotEmpty() && address.isNotEmpty()) {
+                saveBookingToDatabase(service, date, time, address)
                 dialog.dismiss()
             } else {
-                Toast.makeText(requireContext(), "Please select date and time", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
         }
         (dialogBinding.root as ViewGroup).addView(bookButton)
-
         dialog.show()
     }
 
-    private fun saveBookingToDatabase(service: ServiceItem, date: String, time: String) {
+    private fun saveBookingToDatabase(service: ServiceItem, date: String, time: String, address: String) {
         lifecycleScope.launch {
             val newBooking = Booking(
                 customerId = currentCustomerId,
@@ -147,6 +149,7 @@ class CustomerServiceListFragment : Fragment() {
                 serviceName = service.name,
                 date = date,
                 time = time,
+                address = address,
                 status = "PENDING" // Default status
             )
 
@@ -187,14 +190,15 @@ class CustomerServiceAdapter(
 
     inner class ServiceViewHolder(private val binding: ItemCarWashServiceBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(service: ServiceItem) {
-            // Note: Update IDs (serviceTitle, servicePrice) to match your XML
             binding.serviceTitle.text = service.name
-            // If you have a price text view in your item layout:
-            // binding.servicePrice.text = "$${service.price}"
 
-            // Using placeholder image for now
-            binding.serviceImage.setImageResource(com.example.shineauto.R.drawable.standard_wash)
-
+            if (service.imageUri != null) {
+                // Load the image from the saved internal storage path (Content Provider URI)
+                binding.serviceImage.setImageURI(Uri.parse(service.imageUri))
+            } else {
+                // Fallback to the default image resource
+                binding.serviceImage.setImageResource(R.drawable.standard_wash)
+            }
             binding.root.setOnClickListener {
                 onServiceClick(service)
             }

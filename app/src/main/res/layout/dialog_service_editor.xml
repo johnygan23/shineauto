@@ -1,49 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="24dp">
+    android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Service Details"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <EditText
-        android:id="@+id/editServiceName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Service Name (e.g., Gold Wash)" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Service Details"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/editServicePrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:hint="Price (e.g., 50.00)" />
+        <ImageView
+            android:id="@+id/serviceImagePreview"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginBottom="8dp"
+            android:background="#E0E0E0"
+            android:contentDescription="Service Image"
+            android:scaleType="centerCrop"
+            android:src="@drawable/service" />
 
-    <EditText
-        android:id="@+id/editServiceRegion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Region (e.g., Downtown)" />
+        <Button
+            android:id="@+id/btnSelectImage"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="Select Image" />
 
-    <EditText
-        android:id="@+id/editServiceDesc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minLines="3"
-        android:gravity="top"
-        android:hint="Description" />
+        <EditText
+            android:id="@+id/editServiceName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Service Name (e.g., Gold Wash)" />
 
-    <Button
-        android:id="@+id/btnSaveService"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save Service"
-        android:layout_marginTop="16dp"/>
-</LinearLayout>
+        <EditText
+            android:id="@+id/editServicePrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Price (e.g., 50.00)"
+            android:inputType="numberDecimal" />
+
+        <EditText
+            android:id="@+id/editServiceRegion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Region (e.g., Downtown)" />
+
+        <EditText
+            android:id="@+id/editServiceDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:hint="Description"
+            android:minLines="3" />
+
+        <Button
+            android:id="@+id/btnSaveService"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Save Service" />
+    </LinearLayout>
+</ScrollView>

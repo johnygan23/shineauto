@@ -16,6 +16,10 @@ import com.example.shineauto.databinding.FragmentProviderAcceptedOrdersBinding
 import com.example.shineauto.databinding.ItemProviderAcceptedOrderBinding
 import com.example.shineauto.model.Booking
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class ProviderAcceptedOrdersFragment : Fragment() {
 
@@ -113,11 +117,48 @@ class AcceptedOrderAdapter(
 
     inner class ViewHolder(private val binding: ItemProviderAcceptedOrderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Booking) {
-            binding.textServiceName.text = "${item.serviceName} (Status: ${item.status})"
+            binding.textServiceName.text = "${item.serviceName}"
             binding.textCustomerInfo.text = "Customer: ${item.customerName}"
+            binding.textAddress.text = "Address: ${item.address}"
             binding.textDateTime.text = "Scheduled: ${item.date} at ${item.time}"
 
-            binding.btnMarkCompleted.setOnClickListener { onMarkCompletedClick(item) }
+            // --- FIX: Hide button if date is in the future ---
+            if (isDateInFuture(item.date)) {
+                binding.btnMarkCompleted.visibility = View.GONE
+                binding.btnMarkCompleted.isEnabled = false
+            } else {
+                binding.btnMarkCompleted.visibility = View.VISIBLE
+                binding.btnMarkCompleted.isEnabled = true
+                binding.btnMarkCompleted.setOnClickListener { onMarkCompletedClick(item) }
+            }
+        }
+
+        private fun isDateInFuture(dateString: String): Boolean {
+            val sdf = SimpleDateFormat("d/M/yyyy", Locale.getDefault())
+            return try {
+                val bookingDate = sdf.parse(dateString) ?: return false
+                val today = Date()
+
+                // Reset hours/minutes/seconds for accurate day comparison
+                val bookingCal = Calendar.getInstance().apply { time = bookingDate }
+                val todayCal = Calendar.getInstance().apply { time = today }
+
+                // Clear time parts
+                bookingCal.set(Calendar.HOUR_OF_DAY, 0)
+                bookingCal.set(Calendar.MINUTE, 0)
+                bookingCal.set(Calendar.SECOND, 0)
+                bookingCal.set(Calendar.MILLISECOND, 0)
+
+                todayCal.set(Calendar.HOUR_OF_DAY, 0)
+                todayCal.set(Calendar.MINUTE, 0)
+                todayCal.set(Calendar.SECOND, 0)
+                todayCal.set(Calendar.MILLISECOND, 0)
+
+                // Return true if Booking Date is AFTER Today
+                bookingCal.after(todayCal)
+            } catch (e: Exception) {
+                false // If parsing fails, default to showing the button
+            }
         }
     }
 }

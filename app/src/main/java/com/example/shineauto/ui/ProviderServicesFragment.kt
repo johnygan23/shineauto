@@ -1,10 +1,12 @@
 package com.example.shineauto.ui
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -26,8 +28,21 @@ class ProviderServicesFragment : Fragment() {
     private lateinit var adapter: ProviderServiceAdapter
     private var currentProviderId: Int = 0
 
-    // 1. Variable to temporarily hold the URI of the selected image
+    // Variable to hold the selected image path
     private var selectedImagePath: String? = null
+    private lateinit var dialogBinding: DialogServiceEditorBinding // Keep reference to update UI
+
+    // Image Picker Launcher
+    private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            val path = AppUtils.saveImageToInternalStorage(requireContext(), it)
+            selectedImagePath = path
+            // Update the Dialog's ImageView
+            if (::dialogBinding.isInitialized && path != null) {
+                dialogBinding.serviceImagePreview.setImageURI(Uri.parse(path))
+            }
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentProviderServicesBinding.inflate(inflater, container, false)
@@ -37,11 +52,9 @@ class ProviderServicesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Get Logged in Provider ID
         val prefs = requireActivity().getSharedPreferences("ShineAutoPrefs", AppCompatActivity.MODE_PRIVATE)
         currentProviderId = prefs.getInt("USER_ID", -1)
 
-        // 2. Setup RecyclerView
         adapter = ProviderServiceAdapter(
             onEditClick = { service -> showAddEditDialog(service) },
             onDeleteClick = { service -> deleteService(service) }
@@ -49,12 +62,10 @@ class ProviderServicesFragment : Fragment() {
         binding.servicesRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.servicesRecyclerView.adapter = adapter
 
-        // 3. Load Data
         loadServices()
 
-        // 4. Add Button
         binding.fabAddService.setOnClickListener {
-            showAddEditDialog(null) // null means "New Service"
+            showAddEditDialog(null)
         }
     }
 
@@ -71,57 +82,69 @@ class ProviderServicesFragment : Fragment() {
         lifecycleScope.launch {
             ShineAutoDatabase.getDatabase(requireContext()).serviceDao().deleteService(service)
             Toast.makeText(context, "Service Deleted", Toast.LENGTH_SHORT).show()
-            loadServices() // Refresh list
+            loadServices()
         }
     }
 
     private fun showAddEditDialog(serviceToEdit: ServiceItem?) {
         val dialog = BottomSheetDialog(requireContext())
-        val sheetBinding = DialogServiceEditorBinding.inflate(layoutInflater)
-        dialog.setContentView(sheetBinding.root)
+        dialogBinding = DialogServiceEditorBinding.inflate(layoutInflater) // Initialize the binding
+        dialog.setContentView(dialogBinding.root)
 
-        // If Editing, pre-fill data
+        // Reset image path
+        selectedImagePath = null
+
         if (serviceToEdit != null) {
-            sheetBinding.editServiceName.setText(serviceToEdit.name)
-            sheetBinding.editServicePrice.setText(serviceToEdit.price.toString())
-            sheetBinding.editServiceDesc.setText(serviceToEdit.description)
-            sheetBinding.editServiceRegion.setText(serviceToEdit.region)
-            sheetBinding.btnSaveService.text = "Update Service"
+            dialogBinding.editServiceName.setText(serviceToEdit.name)
+            dialogBinding.editServicePrice.setText(serviceToEdit.price.toString())
+            dialogBinding.editServiceDesc.setText(serviceToEdit.description)
+            dialogBinding.editServiceRegion.setText(serviceToEdit.region)
+            dialogBinding.btnSaveService.text = "Update Service"
+
+            // Load existing image
+            selectedImagePath = serviceToEdit.imageUri
+            if (selectedImagePath != null) {
+                dialogBinding.serviceImagePreview.setImageURI(Uri.parse(selectedImagePath))
+            }
         }
 
-        sheetBinding.btnSaveService.setOnClickListener {
-            val name = sheetBinding.editServiceName.text.toString()
-            val price = sheetBinding.editServicePrice.text.toString().toDoubleOrNull() ?: 0.0
-            val desc = sheetBinding.editServiceDesc.text.toString()
-            val region = sheetBinding.editServiceRegion.text.toString()
+        // Handle Image Selection
+        dialogBinding.btnSelectImage.setOnClickListener {
+            pickImage.launch("image/*")
+        }
+
+        dialogBinding.btnSaveService.setOnClickListener {
+            val name = dialogBinding.editServiceName.text.toString()
+            val price = dialogBinding.editServicePrice.text.toString().toDoubleOrNull() ?: 0.0
+            val desc = dialogBinding.editServiceDesc.text.toString()
+            val region = dialogBinding.editServiceRegion.text.toString()
 
             if (name.isNotEmpty() && region.isNotEmpty()) {
                 lifecycleScope.launch {
                     val dao = ShineAutoDatabase.getDatabase(requireContext()).serviceDao()
 
                     if (serviceToEdit == null) {
-                        // Create New
                         val newService = ServiceItem(
                             providerId = currentProviderId,
                             name = name,
                             price = price,
                             description = desc,
                             region = region,
-                            imageUri = selectedImagePath
+                            imageUri = selectedImagePath // Save the image path
                         )
                         dao.addService(newService)
                     } else {
-                        // Update Existing
                         val updatedService = serviceToEdit.copy(
                             name = name,
                             price = price,
                             description = desc,
-                            region = region
+                            region = region,
+                            imageUri = selectedImagePath ?: serviceToEdit.imageUri // Keep old image if no new one selected
                         )
                         dao.updateService(updatedService)
                     }
                     dialog.dismiss()
-                    loadServices() // Refresh List
+                    loadServices()
                 }
             } else {
                 Toast.makeText(context, "Please fill required fields", Toast.LENGTH_SHORT).show()
@@ -136,7 +159,6 @@ class ProviderServicesFragment : Fragment() {
     }
 }
 
-// --- ADAPTER CLASS ---
 class ProviderServiceAdapter(
     private val onEditClick: (ServiceItem) -> Unit,
     private val onDeleteClick: (ServiceItem) -> Unit
