@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.shineauto.AppointmentsPagerAdapter
+import com.example.shineauto.ui.adapter.CustomerBookingsPagerAdapter
 import com.example.shineauto.databinding.FragmentCustomerBookingsBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -26,7 +26,7 @@ class CustomerBookingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Set up ViewPager with an adapter
-        val pagerAdapter = AppointmentsPagerAdapter(this)
+        val pagerAdapter = CustomerBookingsPagerAdapter(this)
         binding.viewPager.adapter = pagerAdapter
 
         // Link the TabLayout and the ViewPager2

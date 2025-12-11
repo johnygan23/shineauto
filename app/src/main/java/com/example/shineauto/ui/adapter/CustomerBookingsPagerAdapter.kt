@@ -1,11 +1,11 @@
-package com.example.shineauto
+package com.example.shineauto.ui.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.shineauto.ui.CustomerHistoryBookingsFragment
 import com.example.shineauto.ui.CustomerUpcomingBookingsFragment
 
-class AppointmentsPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class CustomerBookingsPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int = 2
 

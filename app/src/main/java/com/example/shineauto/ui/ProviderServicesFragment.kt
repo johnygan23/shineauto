@@ -11,12 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.shineauto.data.ShineAutoDatabase
 import com.example.shineauto.databinding.DialogServiceEditorBinding
 import com.example.shineauto.databinding.FragmentProviderServicesBinding
-import com.example.shineauto.databinding.ItemProviderServiceBinding
 import com.example.shineauto.model.ServiceItem
+import com.example.shineauto.ui.adapter.ProviderServiceAdapter
 import com.example.shineauto.utils.AppUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch
@@ -156,40 +155,5 @@ class ProviderServicesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-}
-
-class ProviderServiceAdapter(
-    private val onEditClick: (ServiceItem) -> Unit,
-    private val onDeleteClick: (ServiceItem) -> Unit
-) : RecyclerView.Adapter<ProviderServiceAdapter.ViewHolder>() {
-
-    private var items = listOf<ServiceItem>()
-
-    fun submitList(newItems: List<ServiceItem>) {
-        items = newItems
-        notifyDataSetChanged()
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemProviderServiceBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
-    }
-
-    override fun getItemCount() = items.size
-
-    inner class ViewHolder(private val binding: ItemProviderServiceBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ServiceItem) {
-            binding.serviceName.text = item.name
-            binding.servicePrice.text = "$${item.price}"
-            binding.serviceDescription.text = item.description
-
-            binding.btnEdit.setOnClickListener { onEditClick(item) }
-            binding.btnDelete.setOnClickListener { onDeleteClick(item) }
-        }
     }
 }
