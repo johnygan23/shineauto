@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_provider_orders"
+            android:icon="@android:drawable/ic_menu_my_calendar"
+            android:title="Pending Orders" />
+        <item
+            android:id="@+id/nav_provider_accepted_orders"
+            android:icon="@android:drawable/ic_menu_view"
+            android:title="Accepted Orders" />
+        <item
+            android:id="@+id/nav_provider_services"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="My Services" />
+        <item
+            android:id="@+id/nav_provider_profile"
+            android:icon="@drawable/ic_launcher_foreground"
+            android:title="Profile" />
+    </group>
+</menu>

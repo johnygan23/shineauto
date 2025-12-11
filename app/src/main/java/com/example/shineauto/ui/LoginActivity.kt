@@ -9,7 +9,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.shineauto.ui.MainActivity
 import com.example.shineauto.R
 import com.example.shineauto.data.ShineAutoDatabase
 import kotlinx.coroutines.launch
@@ -18,6 +17,15 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        // 1. Check if user is ALREADY logged in (Auto-Login Feature)
+        val sharedPreferences = getSharedPreferences("ShineAutoPrefs", MODE_PRIVATE)
+        val savedRole = sharedPreferences.getString("USER_ROLE", null)
+
+        if (savedRole != null) {
+            navigateBasedOnRole(savedRole)
+            return // Stop further execution
+        }
 
         val usernameInput = findViewById<EditText>(R.id.loginUsername)
         val passwordInput = findViewById<EditText>(R.id.loginPassword)
@@ -34,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
 
                     if (user != null) {
                         // SAVE SESSION
-                        val sharedPreferences = getSharedPreferences("ShineAutoPrefs", MODE_PRIVATE)
                         val editor = sharedPreferences.edit()
                         editor.putInt("USER_ID", user.id)
                         editor.putString("USER_ROLE", user.role)
@@ -43,10 +50,8 @@ class LoginActivity : AppCompatActivity() {
 
                         Toast.makeText(this@LoginActivity, "Login Successful!", Toast.LENGTH_SHORT).show()
 
-                        // Navigate to Main App
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
+                        // --- FIX: Navigate based on Role ---
+                        navigateBasedOnRole(user.role)
                     } else {
                         Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
                     }
@@ -57,5 +62,17 @@ class LoginActivity : AppCompatActivity() {
         signupRedirect.setOnClickListener {
             startActivity(Intent(this, SignupActivity::class.java))
         }
+    }
+
+    // Helper function to handle navigation
+    private fun navigateBasedOnRole(role: String) {
+        val intent = if (role == "PROVIDER") {
+            Intent(this, ProviderActivity::class.java)
+        } else {
+            // Default to Customer (MainActivity) for "CUSTOMER" or "ADMIN"
+            Intent(this, MainActivity::class.java)
+        }
+        startActivity(intent)
+        finish() // Close LoginActivity so they can't go back
     }
 }

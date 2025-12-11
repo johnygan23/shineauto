@@ -15,11 +15,19 @@ interface BookingDao {
     @Update
     suspend fun updateBooking(booking: Booking)
 
-    // Using Flow for live updates (Customer History)
-    @Query("SELECT * FROM bookings WHERE customerId = :customerId ORDER BY bookingId DESC")
-    fun getBookingsForCustomer(customerId: Int): Flow<List<Booking>>
+    // For Customer: Upcoming (PENDING or ACCEPTED)
+    @Query("SELECT * FROM bookings WHERE customerId = :customerId AND status IN ('PENDING', 'ACCEPTED')")
+    fun getUpcomingBookings(customerId: Int): Flow<List<Booking>>
 
-    // Using Flow for live updates (Provider Dashboard)
+    // For Customer: History (COMPLETED or CANCELLED)
+    @Query("SELECT * FROM bookings WHERE customerId = :customerId AND status IN ('COMPLETED', 'CANCELLED')")
+    fun getHistoryBookings(customerId: Int): Flow<List<Booking>>
+
+    // For Provider: Pending Requests
     @Query("SELECT * FROM bookings WHERE providerId = :providerId AND status = 'PENDING'")
-    fun getPendingRequestsForProvider(providerId: Int): Flow<List<Booking>>
+    fun getPendingRequests(providerId: Int): Flow<List<Booking>>
+
+    // For Provider: Accepted Orders (To be marked completed)
+    @Query("SELECT * FROM bookings WHERE providerId = :providerId AND status = 'ACCEPTED'")
+    fun getAcceptedOrders(providerId: Int): Flow<List<Booking>>
 }

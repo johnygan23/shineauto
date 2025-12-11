@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Service Details"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/editServiceName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Service Name (e.g., Gold Wash)" />
+
+    <EditText
+        android:id="@+id/editServicePrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:hint="Price (e.g., 50.00)" />
+
+    <EditText
+        android:id="@+id/editServiceRegion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Region (e.g., Downtown)" />
+
+    <EditText
+        android:id="@+id/editServiceDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minLines="3"
+        android:gravity="top"
+        android:hint="Description" />
+
+    <Button
+        android:id="@+id/btnSaveService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Service"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

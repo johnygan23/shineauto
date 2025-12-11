@@ -2,8 +2,8 @@ package com.example.shineauto
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.shineauto.ui.HistoryAppointmentsFragment
-import com.example.shineauto.ui.UpcomingAppointmentsFragment
+import com.example.shineauto.ui.CustomerHistoryBookingsFragment
+import com.example.shineauto.ui.CustomerUpcomingBookingsFragment
 
 class AppointmentsPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
@@ -11,8 +11,8 @@ class AppointmentsPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragme
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> UpcomingAppointmentsFragment()
-            1 -> HistoryAppointmentsFragment()
+            0 -> CustomerUpcomingBookingsFragment()
+            1 -> CustomerHistoryBookingsFragment()
             else -> throw IllegalStateException("Invalid position: $position")
         }
     }

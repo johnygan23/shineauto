@@ -3,6 +3,7 @@ package com.example.shineauto.data
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.shineauto.model.User
 
 @Dao
@@ -18,4 +19,11 @@ interface UserDao {
 
     @Query("SELECT * FROM users")
     suspend fun getAllUsers(): List<User> // For Admin
+
+    @Update
+    suspend fun updateUser(user: User)
+
+    @Query("SELECT * FROM users WHERE id = :userId")
+    suspend fun getUserById(userId: Int): User?
+
 }
