@@ -75,7 +75,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_appointments -> navigateToFragment(CustomerBookingsFragment())
             R.id.nav_about_us -> navigateToFragment(InformationFragment())
             R.id.nav_profile -> navigateToFragment(ProfileFragment())
-            // R.id.nav_logout -> logout() // Optional: If you move logout to the drawer
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true

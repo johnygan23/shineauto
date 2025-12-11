@@ -25,7 +25,6 @@ class ProfileFragment : Fragment() {
     private var currentUser: User? = null
     private val PREFS_NAME = "ShineAutoPrefs"
 
-    // [Requirement 3: Image Upload] FileProvider Mechanism
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             val path = AppUtils.saveImageToInternalStorage(requireContext(), it)
@@ -64,9 +63,9 @@ class ProfileFragment : Fragment() {
         binding.userNameText.setOnClickListener { showEditProfileDialog() }
         binding.userEmailText.setOnClickListener { showEditProfileDialog() }
 
-        // Logout button logic (already discussed)
+        // Logout button logic
         binding.logoutButton.setOnClickListener {
-            (activity as? MainActivity)?.logout() ?: (activity as? ProviderActivity)?.logout()
+            (activity as? MainActivity)?.logout() ?: (activity as? ProviderActivity)?.logout() ?: (activity as? AdminActivity)?.logout()
         }
     }
 

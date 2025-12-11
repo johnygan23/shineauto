@@ -30,4 +30,7 @@ interface BookingDao {
     // For Provider: Accepted Orders (To be marked completed)
     @Query("SELECT * FROM bookings WHERE providerId = :providerId AND status = 'ACCEPTED'")
     fun getAcceptedOrders(providerId: Int): Flow<List<Booking>>
+
+    @Query("SELECT COUNT(*) FROM bookings")
+    suspend fun getBookingCount(): Int
 }

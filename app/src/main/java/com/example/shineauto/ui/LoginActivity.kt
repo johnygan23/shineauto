@@ -68,10 +68,12 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateBasedOnRole(role: String) {
         val intent = if (role == "PROVIDER") {
             Intent(this, ProviderActivity::class.java)
-        } else {
-            // Default to Customer (MainActivity) for "CUSTOMER" or "ADMIN"
+        } else if (role == "CUSTOMER"){
             Intent(this, MainActivity::class.java)
+        } else {
+            Intent(this, AdminActivity::class.java)
         }
+
         startActivity(intent)
         finish() // Close LoginActivity so they can't go back
     }

@@ -10,7 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.shineauto.data.ShineAutoDatabase
 import com.example.shineauto.databinding.FragmentCustomerHistoryBookingsBinding
-import com.example.shineauto.utils.AppUtils
+import com.example.shineauto.ui.adapter.BookingAdapter
 import kotlinx.coroutines.launch
 
 class CustomerHistoryBookingsFragment : Fragment() {

@@ -28,7 +28,7 @@ class SignupActivity : AppCompatActivity() {
         val loginRedirect = findViewById<TextView>(R.id.loginRedirectText)
 
         // Setup Role Spinner
-        val roles = arrayOf("CUSTOMER", "PROVIDER", "ADMIN")
+        val roles = arrayOf("CUSTOMER", "PROVIDER") //Removed "ADMIN" to prevent user to create ADMIN account
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, roles)
         roleSpinner.adapter = adapter
 

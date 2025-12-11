@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShineAuto">
         <activity
+            android:name=".ui.AdminActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.ProviderActivity"
             android:exported="false" />
         <activity android:name=".ui.SignupActivity" />

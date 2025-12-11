@@ -18,6 +18,9 @@ interface ServiceDao {
     @Delete
     suspend fun deleteService(service: ServiceItem)
 
+    @Query("SELECT COUNT(*) FROM services")
+    suspend fun getServiceCount(): Int
+
     @Query("SELECT * FROM services")
     fun getAllServices(): List<ServiceItem> // Used by Customers
 
