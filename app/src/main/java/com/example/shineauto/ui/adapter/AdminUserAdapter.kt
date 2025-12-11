@@ -35,6 +35,7 @@ class AdminUserAdapter(
         fun bind(user: User) {
             binding.userName.text = user.username
             binding.userRole.text = "ROLE: ${user.role}"
+            binding.userId.text = "USER ID: ${user.id}"
             binding.userContact.text = user.contactInfo
 
             if (user.profileImageUri != null) {

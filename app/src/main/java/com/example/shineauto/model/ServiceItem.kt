@@ -9,6 +9,5 @@ data class ServiceItem(
     val name: String,
     val price: Double,
     val description: String,
-    val region: String,
     val imageUri: String? = null
 )

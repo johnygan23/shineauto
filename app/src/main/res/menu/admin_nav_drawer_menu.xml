@@ -7,15 +7,18 @@
             android:title="Dashboard" />
         <item
             android:id="@+id/nav_admin_users"
-            android:icon="@android:drawable/ic_menu_manage"
+            android:icon="@android:drawable/ic_menu_my_calendar"
             android:title="Manage Users" />
         <item
-            android:id="@+id/nav_admin_services"
-            android:icon="@drawable/service"
-            android:title="Manage Services" />
+            android:id="@+id/nav_admin_bookings"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Booking List" /> <item
+        android:id="@+id/nav_admin_services"
+        android:icon="@android:drawable/ic_menu_edit"
+        android:title="Manage Services" />
         <item
             android:id="@+id/nav_admin_profile"
-            android:icon="@drawable/ic_launcher_foreground"
+            android:icon="@drawable/profile"
             android:title="Profile" />
     </group>
 </menu>

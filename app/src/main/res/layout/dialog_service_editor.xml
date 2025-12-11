@@ -49,12 +49,6 @@
             android:inputType="numberDecimal" />
 
         <EditText
-            android:id="@+id/editServiceRegion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Region (e.g., Downtown)" />
-
-        <EditText
             android:id="@+id/editServiceDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

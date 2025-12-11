@@ -97,7 +97,6 @@ class ProviderServicesFragment : Fragment() {
             dialogBinding.editServiceName.setText(serviceToEdit.name)
             dialogBinding.editServicePrice.setText(serviceToEdit.price.toString())
             dialogBinding.editServiceDesc.setText(serviceToEdit.description)
-            dialogBinding.editServiceRegion.setText(serviceToEdit.region)
             dialogBinding.btnSaveService.text = "Update Service"
 
             // Load existing image
@@ -116,9 +115,8 @@ class ProviderServicesFragment : Fragment() {
             val name = dialogBinding.editServiceName.text.toString()
             val price = dialogBinding.editServicePrice.text.toString().toDoubleOrNull() ?: 0.0
             val desc = dialogBinding.editServiceDesc.text.toString()
-            val region = dialogBinding.editServiceRegion.text.toString()
 
-            if (name.isNotEmpty() && region.isNotEmpty()) {
+            if (name.isNotEmpty()) {
                 lifecycleScope.launch {
                     val dao = ShineAutoDatabase.getDatabase(requireContext()).serviceDao()
 
@@ -128,7 +126,6 @@ class ProviderServicesFragment : Fragment() {
                             name = name,
                             price = price,
                             description = desc,
-                            region = region,
                             imageUri = selectedImagePath // Save the image path
                         )
                         dao.addService(newService)
@@ -137,7 +134,6 @@ class ProviderServicesFragment : Fragment() {
                             name = name,
                             price = price,
                             description = desc,
-                            region = region,
                             imageUri = selectedImagePath ?: serviceToEdit.imageUri // Keep old image if no new one selected
                         )
                         dao.updateService(updatedService)

@@ -33,4 +33,7 @@ interface BookingDao {
 
     @Query("SELECT COUNT(*) FROM bookings")
     suspend fun getBookingCount(): Int
+
+    @Query("SELECT * FROM bookings ORDER BY bookingId DESC")
+    suspend fun getAllBookings(): List<Booking>
 }

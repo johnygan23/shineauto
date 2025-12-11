@@ -42,6 +42,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         when (item.itemId) {
             R.id.nav_admin_dashboard -> loadFragment(AdminDashboardFragment())
             R.id.nav_admin_users -> loadFragment(AdminUserListFragment())
+            R.id.nav_admin_bookings -> loadFragment(AdminBookingListFragment())
             R.id.nav_admin_services -> loadFragment(AdminServiceListFragment())
             R.id.nav_admin_profile -> loadFragment(ProfileFragment()) // Reuse Profile
         }

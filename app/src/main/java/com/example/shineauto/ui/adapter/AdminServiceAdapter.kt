@@ -44,12 +44,7 @@ class AdminServiceAdapter(
             binding.servicePrice.text = "$${service.price}"
 
             val provider = allUsers.find { it.id == service.providerId }
-            if (provider != null) {
-                binding.serviceProviderName.text = "Provider: ${provider.username}"
-            } else {
-                // Debugging help: Shows the ID if name not found
-                binding.serviceProviderName.text = "Provider: Unknown (ID: ${service.providerId})"
-            }
+            binding.serviceProviderName.text = "Provider User ID: ${service.providerId}"
 
             // Display Service Image
             if (service.imageUri != null) {

@@ -8,7 +8,7 @@ import com.example.shineauto.model.Booking
 import com.example.shineauto.model.ServiceItem
 import com.example.shineauto.model.User
 
-@Database(entities = [User::class, ServiceItem::class, Booking::class], version = 1, exportSchema = false)
+@Database(entities = [User::class, ServiceItem::class, Booking::class], version = 2, exportSchema = false)
 abstract class ShineAutoDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
