@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.example.shineauto.R
 import com.example.shineauto.data.ShineAutoDatabase
 import com.example.shineauto.databinding.DialogEditProfileBinding
 import com.example.shineauto.databinding.FragmentProfileBinding
@@ -25,6 +26,7 @@ class ProfileFragment : Fragment() {
     private var currentUser: User? = null
     private val PREFS_NAME = "ShineAutoPrefs"
 
+    // Image Picker Launcher
     private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         uri?.let {
             val path = AppUtils.saveImageToInternalStorage(requireContext(), it)
@@ -54,18 +56,24 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loadUserData()
 
-        // Feature 3: Image Upload
-        binding.profileImage.setOnClickListener {
-            pickImage.launch("image/*") // Opens gallery for image selection
+        // Button: Change Picture
+        binding.btnChangePicture.setOnClickListener {
+            pickImage.launch("image/*")
         }
 
-        // Assuming you made the username/email/contact views clickable to open edit dialog
-        binding.userNameText.setOnClickListener { showEditProfileDialog() }
-        binding.userEmailText.setOnClickListener { showEditProfileDialog() }
+        // Button: Edit Details
+        binding.btnEditProfile.setOnClickListener {
+            showEditProfileDialog()
+        }
 
-        // Logout button logic
+        // Button: Logout
         binding.logoutButton.setOnClickListener {
-            (activity as? MainActivity)?.logout() ?: (activity as? ProviderActivity)?.logout() ?: (activity as? AdminActivity)?.logout()
+            val act = activity
+            when (act) {
+                is CustomerActivity -> act.logout()
+                is ProviderActivity -> act.logout()
+                is AdminActivity -> act.logout()
+            }
         }
     }
 
@@ -81,17 +89,19 @@ class ProfileFragment : Fragment() {
                     binding.userEmailText.text = user.contactInfo
 
                     if (user.profileImageUri != null) {
-                        binding.profileImage.setImageURI(Uri.parse(user.profileImageUri))
+                        try {
+                            binding.profileImage.setImageURI(Uri.parse(user.profileImageUri))
+                        } catch (e: Exception) {
+                            binding.profileImage.setImageResource(R.drawable.profile_avatar)
+                        }
                     } else {
-                        // Default avatar if no URI exists
-                        binding.profileImage.setImageResource(com.example.shineauto.R.drawable.profile_avatar)
+                        binding.profileImage.setImageResource(R.drawable.profile_avatar)
                     }
                 }
             }
         }
     }
 
-    // [Requirement 4: Edit Details]
     private fun showEditProfileDialog() {
         val dialogBinding = DialogEditProfileBinding.inflate(layoutInflater)
         val dialog = AlertDialog.Builder(requireContext())
@@ -99,7 +109,6 @@ class ProfileFragment : Fragment() {
             .create()
 
         currentUser?.let { user ->
-            // Pre-fill fields
             dialogBinding.editProfileUsername.setText(user.username)
             dialogBinding.editProfileContact.setText(user.contactInfo)
         }
@@ -126,9 +135,10 @@ class ProfileFragment : Fragment() {
                 lifecycleScope.launch {
                     ShineAutoDatabase.getDatabase(requireContext()).userDao().updateUser(updatedUser)
                     currentUser = updatedUser
-                    // Update SharedPreferences if username changed
+
                     if (newUsername != user.username) {
-                        requireActivity().getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE).edit().putString("USERNAME", newUsername).apply()
+                        requireActivity().getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE).edit()
+                            .putString("USERNAME", newUsername).apply()
                     }
                     loadUserData() // Refresh UI
                     Toast.makeText(context, "Profile updated successfully!", Toast.LENGTH_SHORT).show()

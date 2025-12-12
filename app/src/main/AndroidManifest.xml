@@ -11,41 +11,39 @@
         android:roundIcon="@drawable/car_wash_logo0"
         android:supportsRtl="true"
         android:theme="@style/Theme.ShineAuto">
-        <activity
-            android:name=".ui.AdminActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.ProviderActivity"
-            android:exported="false" />
-        <activity android:name=".ui.SignupActivity" />
+
         <activity
             android:name=".ui.LoginActivity"
+            android:theme="@style/Theme.App.Starting"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.SignupActivity" />
+
         <activity
-            android:name=".ui.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.App.Starting">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".ui.AdminActivity"
+            android:exported="false" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".ui.ProviderActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.CustomerActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.AboutUsActivity"
-            android:parentActivityName=".ui.MainActivity" />
+            android:parentActivityName=".ui.CustomerActivity" />
         <activity
             android:name=".ui.FaqsActivity"
-            android:parentActivityName=".ui.MainActivity" />
+            android:parentActivityName=".ui.CustomerActivity" />
         <activity
             android:name=".ui.ContactUsActivity"
-            android:parentActivityName=".ui.MainActivity" />
+            android:parentActivityName=".ui.CustomerActivity" />
     </application>
 
 </manifest>

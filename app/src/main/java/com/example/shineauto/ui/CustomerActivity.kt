@@ -14,20 +14,19 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.shineauto.R
-import com.example.shineauto.databinding.ActivityMainBinding
+import com.example.shineauto.databinding.ActivityCustomerBinding
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class CustomerActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     // Make binding private to prevent external access
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityCustomerBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityCustomerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // 1. Fix for enableEdgeToEdge: Prevent layout from hiding behind system bars

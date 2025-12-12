@@ -1,7 +1,6 @@
 package com.example.shineauto.ui
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -12,9 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.shineauto.R
 import com.example.shineauto.data.ShineAutoDatabase
 import kotlinx.coroutines.launch
-
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 class LoginActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
@@ -24,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (savedRole != null) {
             navigateBasedOnRole(savedRole)
-            return // Stop further execution
+            return
         }
 
         val usernameInput = findViewById<EditText>(R.id.loginUsername)
@@ -49,8 +50,6 @@ class LoginActivity : AppCompatActivity() {
                         editor.apply()
 
                         Toast.makeText(this@LoginActivity, "Login Successful!", Toast.LENGTH_SHORT).show()
-
-                        // --- FIX: Navigate based on Role ---
                         navigateBasedOnRole(user.role)
                     } else {
                         Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT).show()
@@ -69,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
         val intent = if (role == "PROVIDER") {
             Intent(this, ProviderActivity::class.java)
         } else if (role == "CUSTOMER"){
-            Intent(this, MainActivity::class.java)
+            Intent(this, CustomerActivity::class.java)
         } else {
             Intent(this, AdminActivity::class.java)
         }

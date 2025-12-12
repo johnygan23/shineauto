@@ -2,15 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="24dp">
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:cardCornerRadius="100dp"
+        app:cardElevation="10dp">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/car_wash_logo0" />
+    </com.google.android.material.card.MaterialCardView>
+
     <TextView
+        android:paddingTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ShineAuto Login"
-        android:textSize="24sp"
+        android:textSize="32sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp"/>
 
